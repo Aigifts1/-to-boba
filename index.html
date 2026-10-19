@@ -1,1 +1,375 @@
 
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#080808">
+<title>إلى بوبا ❤️</title>
+
+<style>
+:root {
+  --gold: #e3bc69;
+  --gold-light: #fff0cc;
+  --black: #080808;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  padding: 22px 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background:
+    radial-gradient(ellipse at top, #30200c 0%, #11100d 35%, #080808 75%);
+  color: var(--gold-light);
+  font-family: Tahoma, Arial, sans-serif;
+  text-align: center;
+}
+
+.card {
+  width: 100%;
+  max-width: 540px;
+  padding: 27px 19px;
+  border: 1px solid #a98540;
+  border-radius: 23px;
+  background: linear-gradient(145deg, #191710, #080808 75%);
+  box-shadow: 0 0 35px #d9a44120;
+}
+
+h1 {
+  margin: 0 0 22px;
+  color: var(--gold);
+  font-size: 30px;
+}
+
+.subtitle {
+  line-height: 2;
+  color: #f8e6bf;
+}
+
+.password-screen {
+  max-width: 370px;
+  margin: auto;
+}
+
+input {
+  width: 100%;
+  padding: 15px;
+  margin: 12px 0;
+  border: 1px solid #a98540;
+  border-radius: 12px;
+  background: #101010;
+  color: white;
+  font-size: 18px;
+  text-align: center;
+}
+
+button {
+  width: 100%;
+  padding: 15px 12px;
+  border-radius: 14px;
+  font-family: Tahoma, Arial, sans-serif;
+  font-size: 17px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: transform .2s ease;
+}
+
+button:active {
+  transform: scale(.98);
+}
+
+.gold-button,
+.yes {
+  color: #17120a;
+  background: linear-gradient(135deg, #f4d88f, #c69a43);
+  border: 1px solid #f4d88f;
+}
+
+.error {
+  min-height: 25px;
+  margin-top: 8px;
+  color: #ff9c9c;
+  font-size: 14px;
+}
+
+#site {
+  display: none;
+}
+
+#message {
+  color: #fff0d0;
+  font-size: 19px;
+  line-height: 2.15;
+  white-space: pre-line;
+  overflow-wrap: anywhere;
+  text-align: center;
+}
+
+.cursor {
+  display: inline-block;
+  width: 2px;
+  height: 22px;
+  margin-right: 3px;
+  vertical-align: middle;
+  background: var(--gold);
+  animation: blink .7s steps(2) infinite;
+}
+
+@keyframes blink {
+  50% { opacity: 0; }
+}
+
+#proposal {
+  display: none;
+  margin-top: 25px;
+  animation: appear 1.2s ease both;
+}
+
+.photo {
+  display: block;
+  width: 100%;
+  max-width: 430px;
+  max-height: 540px;
+  object-fit: contain;
+  margin: 0 auto;
+  border: 1px solid #a98540;
+  border-radius: 17px;
+  box-shadow: 0 0 25px #d8a94a20;
+}
+
+.buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 13px;
+  margin-top: 22px;
+}
+
+.think {
+  color: #f4d88f;
+  background: #111;
+  border: 1px solid #a98540;
+}
+
+#musicButton {
+  display: none;
+  margin-top: 12px;
+}
+
+@keyframes appear {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 380px) {
+  h1 { font-size: 26px; }
+  #message { font-size: 17px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+  }
+}
+</style>
+</head>
+
+<body>
+<main class="card">
+
+  <!-- واجهة الباسورد -->
+  <section id="lock" class="password-screen">
+    <h1>مكانك عندي ❤️</h1>
+
+    <p class="subtitle">
+      فيه رسالة صغيرة مخصوص ليكي يا بوبا،
+      ومش هتتفتح غير لما تكتبي كلمة السر ✨
+    </p>
+
+    <form id="passwordForm">
+      <input
+        id="password"
+        type="password"
+        placeholder="Enter password"
+        autocomplete="off"
+        aria-label="Password"
+        required
+      >
+
+      <button class="gold-button" type="submit">
+        افتحي رسالتك يا بوبا 💛
+      </button>
+
+      <div id="error" class="error" aria-live="polite"></div>
+    </form>
+  </section>
+
+  <!-- محتوى الرسالة -->
+  <section id="site">
+    <h1>إلى بوبا ❤️</h1>
+
+    <div id="message"></div>
+    <span id="cursor" class="cursor" aria-hidden="true"></span>
+
+    <button
+      id="musicButton"
+      class="gold-button"
+      type="button"
+      onclick="playSong()"
+    >
+      شغّلي الأغنية 🎵
+    </button>
+
+    <!-- الصورة والاختيارات تظهر بعد انتهاء الكتابة -->
+    <section id="proposal">
+      <img
+        class="photo"
+        src="bobaa.png"
+        alt="شاب راكع بيقدم خاتم لبوبا في أجواء رومانسية"
+      >
+
+      <div class="buttons">
+        <button class="yes" type="button" onclick="reply('yes')">
+          موافقة ❤️
+        </button>
+
+        <button class="think" type="button" onclick="reply('think')">
+          سيبني أفكر 🥹
+        </button>
+      </div>
+    </section>
+  </section>
+
+  <!-- الأغنية -->
+  <audio id="song" src="bobaa.mp3" preload="auto" loop></audio>
+
+</main>
+
+<script>
+const PASSWORD = "Boba";
+const PHONE = "201025403293";
+
+const messageText =
+`يا شمس الدنيا، الدنيا بتنور لما تطلع ضحكة منك ❤️
+
+يمكن الكلام ساعات مايعرفش يوصف اللي جوانا، ويمكن مهما الواحد قال يفضل فيه كلام كتير لسه ما اتقالش، بس أنا حبيت أكتبلك شوية من اللي في قلبي، يمكن الكلام ده يقدر يوصلك إحساسي.
+
+عارفة يا بوبا؟ فيه ناس بتدخل حياتنا بشكل عادي، وبعد شوية نكتشف إن وجودهم بقى مختلف، وإن ضحكتهم بقت حاجة بنستناها، وإن أبسط كلام منهم ممكن يخلّي اليوم كله أحلى.
+
+إنتِ بالنسبالي مش مجرد شخص بكلمه، إنتِ إنسانة ليها مكانة خاصة، وتفاصيلك الصغيرة بتفرق، وضحكتك ليها تأثير جميل، وحتى اللحظات العادية معاكي بيبقى ليها معنى تاني.
+
+يمكن مش بعرف أرتب كلامي دايمًا، ويمكن ساعات ما بعرفش أقول كل اللي جوايا بالطريقة الصح، لكن ده مش معناه إن إحساسي قليل، بالعكس، ساعات الكلام بيبقى أقل بكتير من اللي القلب عايز يقوله.
+
+أنا بحب فكرة إنك تكوني مبسوطة، وإن يومك يعدّي بخير، وإنك تلاقي سبب تضحكي عشانه حتى لو كان بسيط. وبحب إنك تفضلي دايمًا شايفة نفسك جميلة، ومميزة، وتستاهلي كل حاجة حلوة في الدنيا.
+
+يا بوبا، لو الدنيا كانت يوم طويل ومتعب، أتمنى تلاقي في الكلام ده حاجة بسيطة تفرّحك. ولو كنتِ بتضحكي وإنتِ بتقري، يبقى أنا كده وصلت لجزء من اللي كنت عايز أقوله.
+
+مش لازم كل اللحظات الحلوة تكون كبيرة أو متخطط لها، ساعات رسالة صغيرة، أو كلمة صادقة، أو ضحكة من القلب، بتفضل في الذاكرة أكتر من حاجات كتير.
+
+وعشان كده حبيت أعملك الصفحة دي مخصوص، وأخلي كل تفصيلة فيها هادية ودافية، شبه الإحساس اللي كنت عايز أوصلهولك. حتى اللون الدهبي وسط الأسود، كأنه نور صغير وسط ليل هادي.
+
+أتمنى دايمًا أشوف ضحكتك، وأتمنى الأيام الجاية تكون ليكي أحنّ وأجمل، وتلاقي فيها راحة وفرحة وناس تحبلك الخير بجد.
+
+ولو هقولك حاجة واحدة من قلبي، فهي إن ضحكتك غالية، ووجودك له معنى، وإنك تستاهلي كلام حلو يتقالك من غير مناسبة، وتستاهلي حد يقدّر تفاصيلك الصغيرة قبل الكبيرة.
+
+خدي وقتك وإنتِ بتقري، وابتسمي لو الكلام لمس قلبك ولو بحاجة بسيطة، لأن أجمل حاجة في الرسالة دي إنها وصلتلك إنتِ بالذات.
+
+يا شمس الدنيا، خلي ضحكتك منوّرة زي ما هي، وخلي قلبك دايمًا مليان أمل، لأن فيه حاجات حلوة كتير لسه مستنياكي.
+
+وفي الآخر، يا بوبا، دي رسالة بسيطة من قلبي ليكي، فيها شوية كلام وشوية إحساس، وأمنية إنك تكوني مبسوطة وإنتِ بتقريها.
+
+إنتِ تستاهلي كل حاجة حلوة ❤️💛`;
+
+const lock = document.getElementById("lock");
+const site = document.getElementById("site");
+const form = document.getElementById("passwordForm");
+const passwordInput = document.getElementById("password");
+const errorBox = document.getElementById("error");
+const song = document.getElementById("song");
+const musicButton = document.getElementById("musicButton");
+const messageBox = document.getElementById("message");
+const cursor = document.getElementById("cursor");
+const proposal = document.getElementById("proposal");
+
+let index = 0;
+let started = false;
+
+form.addEventListener("submit", async function(event) {
+  event.preventDefault();
+
+  if (passwordInput.value !== PASSWORD) {
+    errorBox.textContent = "الباسورد مش صحيح، جرّبي تاني ❤️";
+    passwordInput.value = "";
+    passwordInput.focus();
+    return;
+  }
+
+  errorBox.textContent = "";
+  lock.style.display = "none";
+  site.style.display = "block";
+
+  // محاولة تشغيل الموسيقى بعد ضغط زر الفتح.
+  try {
+    await song.play();
+  } catch (error) {
+    musicButton.style.display = "block";
+  }
+
+  if (!started) {
+    started = true;
+    setTimeout(typeMessage, 500);
+  }
+});
+
+async function playSong() {
+  try {
+    await song.play();
+    musicButton.style.display = "none";
+  } catch (error) {
+    musicButton.textContent = "اضغطي لتشغيل الأغنية 🎵";
+  }
+}
+
+function typeMessage() {
+  if (index < messageText.length) {
+    messageBox.textContent += messageText.charAt(index);
+
+    const character = messageText.charAt(index);
+    index++;
+
+    // كتابة هادية حرف حرف مع وقفة بسيطة عند السطور الجديدة.
+    const delay = character === "\n" ? 380 : 65;
+    setTimeout(typeMessage, delay);
+  } else {
+    cursor.style.display = "none";
+    proposal.style.display = "block";
+  }
+}
+
+function reply(choice) {
+  const replies = {
+    yes: "موافقة ❤️💍",
+    think: "سيبني أفكر 🥹❤️"
+  };
+
+  const url =
+    "https://wa.me/" + PHONE +
+    "?text=" + encodeURIComponent(replies[choice]);
+
+  window.location.href = url;
+}
+</script>
+</body>
+</html>
